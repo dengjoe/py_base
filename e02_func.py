@@ -72,6 +72,7 @@ def now_time():
 	print(time.strftime('%Y-%m-%d %H:%M:%S',tm))
 	return tm
 
+print("\n---------decorator------------")
 now()
 print(now_time())
 
