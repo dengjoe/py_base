@@ -60,13 +60,16 @@ print(sStr1)
 #查找字符
 #strchr(sStr1,sStr2)
 # < 0 为未找到
+print("-----find char-----")
+
 sStr1 = 'strchr'
-sStr2 = 's'
-nPos = sStr1.index(sStr2)
-print(nPos)
+#print("index of u:", sStr1.index("u")) #ValueError: substring not found
+print("index of s:", sStr1.index("s"))
 
 #比较字符串: python3没有cmp了，用==就行
 #strcmp(sStr1,sStr2)
+print("-----compare string-----")
+
 sStr1 = 'strchr'
 sStr2 = 'strch'
 print("cmp all:", sStr1==sStr2)
@@ -138,9 +141,10 @@ print(nPos)
 
 #查找字符串
 #strstr(sStr1,sStr2)
+print("-----find string-----")
 sStr1 = 'abcdefg'
-sStr2 = 'cde'
-print(sStr1.find(sStr2))
+print("find cde:", sStr1.find("cde"))
+print("find fgh:", sStr1.find("fgh"))
 
 
 #分割字符串
