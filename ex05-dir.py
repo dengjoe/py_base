@@ -16,12 +16,11 @@ import sys
 # os.path.normpath(path):规范path字符串形式
 
 # os.path.split(name):分割文件名与目录（事实上，如果你完全使用目录，它也会将最后一个目录作为文件名而分离，同时它不会判断文件或目录是否存在）
-# os.path.splitext():分离文件名与扩展名
+# os.path.splitext(name):分离文件名与扩展名
 # os.path.join(path,name):连接目录与文件名或目录
 # os.path.basename(path):返回文件名
 # os.path.dirname(path):返回文件路径 
 
-print(os.listdir("C:\data\今日网校"))
 print("os.getcwd:", os.getcwd())
 
 print("\n--- path functions:")
@@ -29,6 +28,8 @@ print("split:",    os.path.split("C:\data\今日网校\今日网校第三课 未
 print("splitext:", os.path.splitext("C:\data\今日网校\今日网校第三课 未来趋势前10题（1）.mp3"))
 print("basename:", os.path.basename("C:\data\今日网校\今日网校第三课 未来趋势前10题（1）.mp3"))
 print("dirname:",  os.path.dirname("C:\data\今日网校\今日网校第三课 未来趋势前10题（1）.mp3"))
+
+print(os.listdir("C:\data\今日网校"))
 
 print("\n--- os.walk functions:")
 yid = os.walk("C:\data\今日网校")
