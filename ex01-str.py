@@ -1,6 +1,7 @@
 # -*- coding:utf8 -*-
 
 import os
+import re
 
 #print(,) 与 print(+)的区别：前者加入一个空格来分隔，后者没有
 # str operation
@@ -204,3 +205,19 @@ print(str[::-1])  #创造一个与原字符串顺序相反的字符串
 print(str[-3:-1]) #截取倒数第三位与倒数第一位之前的字符
 print(str[-3:])   #截取倒数第三位到结尾
 print(str[:-5:-3]) #逆序截取，具体啥意思没搞明白？
+
+# 替换字符串,无效？
+a = "Hello world"
+a.replace("world", "python")
+print(a)
+
+# 正则有效
+strall = "@123 023 中文@12345"
+result = re.sub(r'\@\d{3}', "abc", strall)
+print(result)
+
+result = re.sub("@123", "@北京", strall)
+print(result)
+
+result = re.sub(r"@\d{0,3}", "", strall)
+print(result)
