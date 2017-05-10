@@ -21,36 +21,46 @@ import sys
 # os.path.basename(path):返回文件名
 # os.path.dirname(path):返回文件路径 
 
-print("os.getcwd:", os.getcwd())
+def test_path_funcs():
+    print("os.getcwd:", os.getcwd())
 
-print("\n--- path functions:")
-print("split:",    os.path.split("C:\data\今日网校\今日网校第三课 未来趋势前10题（1）.mp3"))
-print("splitext:", os.path.splitext("C:\data\今日网校\今日网校第三课 未来趋势前10题（1）.mp3"))
-print("basename:", os.path.basename("C:\data\今日网校\今日网校第三课 未来趋势前10题（1）.mp3"))
-print("dirname:",  os.path.dirname("C:\data\今日网校\今日网校第三课 未来趋势前10题（1）.mp3"))
+    print("\n--- path functions:")
+    print("split:",    os.path.split("C:\data\今日网校\今日网校第三课 未来趋势前10题（1）.mp3"))
+    print("splitext:", os.path.splitext("C:\data\今日网校\今日网校第三课 未来趋势前10题（1）.mp3"))
+    print("basename:", os.path.basename("C:\data\今日网校\今日网校第三课 未来趋势前10题（1）.mp3"))
+    print("dirname:",  os.path.dirname("C:\data\今日网校\今日网校第三课 未来趋势前10题（1）.mp3"))
 
-print(os.listdir("C:\data\今日网校"))
+    name = "C:\data\今日网校\今日网（1）.mp3"
+    print(os.path.basename(name))
+    print(name)
 
-print("\n--- os.walk functions:")
-yid = os.walk("C:\data\今日网校")
-for rootDir, pathList, fileList in yid:
-    print("\nrootDir:", rootDir)
-    print("pathList:", pathList)
-    print("fileList:", fileList)
+    # path = "C:\data\今日网校"
+    path = "D:\\data\\books\\编程\\语言"
+    print("\n--- os.listdir:")
+    print(os.listdir(path))
 
+    print("\n--- os.walk:")
+    print(os.walk(path))
 
-def readfile(dir):  
+def list_path(dir):  
     for f in os.listdir(dir):  
         filepath = os.path.join(dir, f)  
         if os.path.isdir(filepath):  
             print("dir: " + filepath)
-            readfile(filepath)  
+            list_path(filepath)  
         elif os.path.isfile(filepath):
-            sts = f.split('.')
-            print(sts)
+            # sts = f.split('.')
+            # print(sts)
             print(filepath)  
-  
-def readfile2(dir):  
+
+def list_path1(dir):
+    yid = os.walk(dir)
+    for rootDir, pathList, fileList in yid:
+        print("\nrootDir:", rootDir)
+        print("pathList:", pathList)
+        print("fileList:", fileList)
+ 
+def list_path2(dir):  
     yid = os.walk(dir)  
     for rootDir, pathList, fileList in yid:  
         for file in fileList:  
@@ -59,13 +69,23 @@ def readfile2(dir):
             print('path ' + os.path.join(rootDir, path))
 
 
-# dir = 'C:\data\\xj'  
-# readfile(dir)
+if __name__ == '__main__':
+    test_path_funcs()
 
-print("\n---------\n") 
-#readfile2("C:\data\今日网校")
+    path = "D:/data/books/编程/语言"  
+    # path = "C:/data/今日网校"
+    
+    print("\n----list_path-----\n") 
+    list_path(path)
+
+    print("\n----list_path1-----\n") 
+    list_path1(path)
+
+    print("\n----list_path2-----\n") 
+    list_path2(path)
 
 # 获取脚本文件的当前路径
+print(sys.path)
 path = sys.path[0]
 print(path)
 if os.path.isfile(path):
