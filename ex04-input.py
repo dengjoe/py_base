@@ -1,20 +1,21 @@
 # -*- coding:utf8 -*-
 
 # input to list
-print("input to list test:")
-ll = []
-while 1:
-	sin = input("What's your name?(ok to exit)")
-	if sin=="ok":
-		print("ok & out\n")
-		break;
-	ll.append(sin)
+def input2list():
+	print("input to list test:")
+	ll = []
+	while 1:
+		sin = input("What's your name?(ok to exit)")
+		if sin=="ok":
+			print("ok & out\n")
+			break;
+		ll.append(sin)
 
-print(ll)
+	print(ll)
 
-while "go" in ll:
-	ll.remove("go")
-print(ll)
+	while "go" in ll:
+		ll.remove("go")
+	return ll
 
 # input to dict
 def input2dict():	
