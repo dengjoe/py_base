@@ -37,6 +37,10 @@ print("val:", val)
 m3 = "5/2=" + str(val)
 print(m3)
 
+m4 = "5/2= %d" % val
+print(m4)
+
+print("%s 5/2= %f" % ("joe:", val))
 
 print("\n-----------------------\n")
 
@@ -193,23 +197,23 @@ sStr1 = sStr1[::-1]
 print(sStr1)
 
 #截取字符串
-
 str = "0123456789"
-print(str[0:3]) #截取第一位到第三位的字符
-print(str[:])   #截取字符串的全部字符
-print(str[6:])  #截取第七个字符到结尾
-print(str[:-3]) #截取从头开始到倒数第三个字符之前
-print(str[2])   #截取第三个字符
-print(str[-1])  #截取倒数第一个字符
-print(str[::-1])  #创造一个与原字符串顺序相反的字符串
-print(str[-3:-1]) #截取倒数第三位与倒数第一位之前的字符
-print(str[-3:])   #截取倒数第三位到结尾
-print(str[:-5:-3]) #逆序截取，具体啥意思没搞明白？
+print("\nstr:", str)
+print("str[0:3]", str[0:3]) #截取第一位到第三位的字符
+print("str[:]", str[:])   #截取字符串的全部字符
+print("str[6:]", str[6:])  #截取第七个字符到结尾
+print("str[:-3]", str[:-3]) #截取从头开始到倒数第三个字符之前
+print("str[2]", str[2])   #截取第三个字符
+print("str[-1]", str[-1])  #截取倒数第一个字符
+print("str[::-1]", str[::-1])  #创造一个与原字符串顺序相反的字符串
+print("str[-3:-1]", str[-3:-1]) #截取倒数第三位与倒数第一位之前的字符
+print("str[-3:]", str[-3:])   #截取倒数第三位到结尾
+print("str[:-5:-3]", str[:-5:-3]) #逆序截取，具体啥意思没搞明白？
 
-# 替换字符串,无效？
+# 替换字符串,返回值
 a = "Hello world"
-a.replace("world", "python")
-print(a)
+b = a.replace("world", "python")
+print(a, b)
 
 # 正则有效
 strall = "@123 023 中文@12345"

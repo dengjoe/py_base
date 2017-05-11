@@ -29,6 +29,7 @@ def test_path_funcs():
     print("splitext:", os.path.splitext("C:\data\今日网校\今日网校第三课 未来趋势前10题（1）.mp3"))
     print("basename:", os.path.basename("C:\data\今日网校\今日网校第三课 未来趋势前10题（1）.mp3"))
     print("dirname:",  os.path.dirname("C:\data\今日网校\今日网校第三课 未来趋势前10题（1）.mp3"))
+    print("dirname:",  os.path.dirname("http://rec.owllive.cn:9002/live/stream/index.m3u8"))
 
     name = "C:\data\今日网校\今日网（1）.mp3"
     print(os.path.basename(name))

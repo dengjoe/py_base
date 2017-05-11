@@ -9,18 +9,18 @@ import os
 
 def write_file(fname):
 	try:
-		f = open('./test.txt', 'w')
+		f = open(fname, 'w')
 		if f:
-			f.write("hello ")
+			f.write("hello baby\n")
 			f.write("world \n")		
 	finally:
 		if f:
-			print("close\n")
+			print("close file\n")
 			f.close()
 
-def read_file(fname)
+def read_file(fname):
 	try:
-		f = open('./test.txt', 'r')
+		f = open(fname, 'r')
 		if f:
 			content = f.read()
 			print(content)
@@ -29,13 +29,14 @@ def read_file(fname)
 			f.close()
 
 
-# 不需try，也无需close的
-with open('./test.txt', 'r') as f:
-	print(f.read())
 
+                        # 
 if __name__ == '__main__':
 	fname = "./test.txt"
 	write_file(fname)
 	read_file(fname)
 
-	
+	# 不需try，也无需close的
+	with open(fname, 'r') as f:
+		for line in f.readlines():
+			print(line.strip()) # 把末尾的'\n'删掉
