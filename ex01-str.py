@@ -225,3 +225,14 @@ print(result)
 
 result = re.sub(r"@\d{0,3}", "", strall)
 print(result)
+
+#字符串与二进制数据的转换
+#将string格式转换成bytearray:
+str0 = "通常所说的BOSS分为四个部分"
+byarray = str0.encode() #得到b''数据
+print(type(byarray), byarray)
+
+#按string来显示,byarray代表接收到的数据
+str1 = byarray.decode('utf-8') #这样就直接转换成str格式
+print(type(str1), str1)
+                              

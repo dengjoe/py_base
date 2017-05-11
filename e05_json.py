@@ -34,6 +34,14 @@ class MsgItem(object):
 	def __str__(self):
 		return "%s  %d  %s  %s" % (self.__name, self.__uid, self.time, self.content)
 
+	def json(self):
+		return {
+		"name": self.__name,
+		"uid": self.__uid,
+		"time": self.time,
+		"content": self.content
+		}
+
 	@property
 	def uid(self):
 		return self.__uid
@@ -46,6 +54,9 @@ class MsgItem(object):
 def dict2MsgItem(d):
     return MsgItem(d)
 
+def MsgItem2json(msg):
+	return msg.json()
+
 
 def test_json_msg():
 	""" msg object <--> json string demo """
@@ -56,7 +67,12 @@ def test_json_msg():
 	print(msg, type(msg))
 
 	msg.uid = 12345
+	# 如果用此lambda函数使用对象的dict，则不要使用私有成员变量，以方便key名一一对应
 	strmsg = json.dumps(msg, default=lambda msg1: msg1.__dict__)
+	print(strmsg, type(strmsg))
+
+	# 使用私有成员变量，则应该增加转换函数
+	strmsg = json.dumps(msg, default=MsgItem2json)
 	print(strmsg, type(strmsg))
 
 
