@@ -11,6 +11,7 @@ import getopt
 def test():
 	args = sys.argv
 	print(args)
+	print(sys.argv[1])
 
 	if len(args)<5:
 		print(args[0], '-i inputname -o outputname')
