@@ -45,22 +45,17 @@ print(sorted(names, key=str.lower, reverse=True)) #小写比较，并反向排�
 
 #6 decorator装饰器
 import time
-
+import functools
 
 def log(func):
+	@functools.wraps(func)
 	def wrapper(*args, **kw):
 		print("%s() in" %func.__name__)
 		ret = func(*args, **kw)
-		print("%s() out" %func.__name__)
+		print("%s() out\n" %func.__name__)
 		return ret
 	return wrapper
 
-## error with return value
-# def log2(func):
-# 	print("%s() in" %func.__name__)
-# 	ret = func()
-# 	print("%s() out" %func.__name__)
-# 	return ret
 
 @log
 def now():
@@ -73,7 +68,21 @@ def now_time():
 	return tm
 
 print("\n---------decorator------------")
+print(now)
 now()
 print(now_time())
 
 
+# test other way.
+def log2(func):
+	print("%s() in" %func.__name__)
+	ret = func()
+	print("%s() out" %func.__name__)
+	return ret
+
+def foofunc():
+	print("hello test")
+	return "hello"
+
+ret = log2(foofunc)
+print(ret)
