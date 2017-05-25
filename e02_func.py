@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 ## 
 import re
+import collections
 from functools import reduce
 
 #1 lamda 匿名函数
@@ -8,25 +9,30 @@ mul = lambda x:x*x
 add = lambda x:x+x
 iterable =  [1,2,3,4,5,6,7,8,9]
 
-#2 map
+#2 map:接收一个函数和一个序列，返回一个Iterator,惰性序列
 m0 = map(add, iterable)
-print(list(m0))
+print(type(m0), m0)
+print("Iterable:", isinstance(m0, collections.Iterable))
+print("Iterator:", isinstance(m0, collections.Iterator))
+print("map:", list(m0), "\n")
 
-funcs = [mul, add]
-m1 = map(lambda f:f(3), funcs)
-print(list(m1))
+m1 = map(lambda f:f(3), [mul, add])
+print("map:", list(m1))
 
-#3 reduce
-func = lambda x,y:x+y
-m2= reduce(func, iterable)
-print(m2)
+#3 reduce:接收一个函数和一个序列，返回一个计算结果
+r1 = reduce(lambda x,y:x+y, iterable)
+print("reduce:", r1)
 
-#4 filter
+words = ["how", "are", "you", "can", "i", "help", "you"]
+r2 = reduce(lambda x,y:x+' '+y, words)
+print("reduce:", r2)
+
+#4 filter：接收一个函数和一个序列，返回处理为True的结果
 def is_odd(n):
     return n % 2 == 1
 
 m3 = filter(is_odd, iterable)
-print(list(m3))
+print("filter:", list(m3))
 
 
 #5 sorted

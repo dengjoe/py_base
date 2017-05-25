@@ -9,75 +9,128 @@ __author__ = 'Kevin deng'
 import time
 import datetime
 
-#把datetime转成字符串
-def datetime_toString(dt):
-    return dt.strftime("%Y-%m-%d-%H")
 
-#把字符串转成datetime
-def string_toDatetime(string):
-    return datetime.strptime(string, "%Y-%m-%d %H:%M:%S")
+#1、datetime时间函数
 
-#把字符串转成时间戳timestamp
+#datetime与字符串间的转换
+def datetime2str(dt):
+	return dt.strftime("%Y-%m-%d %H:%M:%S")
+
+def str2datetime(strtime):
+	return datetime.datetime.strptime(strtime, "%Y-%m-%d %H:%M:%S")
+
+#取当前时间(datetime)
+def test_datetime():
+	print("\ntest_datetime:")
+	now = datetime.datetime.now()
+	print("now datetime:", type(now), now)
+
+	strtime = datetime2str(now)
+	print(type(strtime), strtime)
+
+	dt = str2datetime(strtime)
+	print(type(dt), dt)
+
+
+#2、时间戳（float）函数
+
+#时间戳timestamp(float)与字符串间的转换
+def timestamp2str(timestamp):
+	time_array = time.localtime(timestamp)
+	return time.strftime("%Y-%m-%d %H:%M:%S", time_array)
+
 def str2timestamp(strtime):
-	timeArray = time.strptime(strtime, "%Y-%m-%d %H:%M:%S")
-	time1 = time.mktime(timeArray)
-	print(type(timeArray), timeArray)
-	print(type(time1), time1)
-	return time1	
+	time_array = time.strptime(strtime, "%Y-%m-%d %H:%M:%S")
+	return time.mktime(time_array)
 
+#取当前时间戳
+def test_timestamp():
+	print("\ntest_timestamp:")
+	now = time.time()
+	print("now time:", type(now), now)
+
+	strnow = timestamp2str(now)
+	print(type(strnow), strnow)
+
+	tm = str2timestamp(strnow)
+	print(type(tm), tm)
+
+#3、时间字符串格式变换
+def test_strtime():
+	print("\ntest_strtime:")
+	strtime = "2017-05-16 15:43:42"
+
+	#use time
+	time_array = time.strptime(strtime, "%Y-%m-%d %H:%M:%S")
+	str2 = time.strftime("%Y/%m/%d %H:%M:%S", time_array)
+	print(strtime, "->", str2)
+
+	#use datetime
+	dt = datetime.datetime.strptime(strtime, "%Y-%m-%d %H:%M:%S")
+	str3 = dt.strftime("%Y/%m/%d %H:%M:%S")
+	print(strtime, "->", str3)
+
+
+#计算时间差
 def time_diff_now(strtime):
-	""" 计算时间差 """ 
 	print("\n----time_diff_now------")
 	now = datetime.datetime.now()
-	print(type(now), now)
+	print("now:", type(now), now)
 
 	old = datetime.datetime.strptime(strtime, "%Y-%m-%d %H:%M:%S")
-	print(type(old), old)
+	print("old:", type(old), old)
 
 	diff = now-old
-	print(type(diff), diff)
+	print("now-old:",type(diff), diff)
 	print("seconds:", diff.seconds)
 	print("microseconds:", diff.microseconds)
 	print("days:", diff.days)
 
-# windows is ok
+
+# 计时函数。windows下正常，linux下不对
 def time_clock_diff():
+	print("\n----time_clock_diff------")
 	cl1 = time.clock()
-	print(type(cl1), cl1)
+	print("cl1:", type(cl1), cl1) #第一个次运行结果，不能只看值
 	time.sleep(1.3)
 
 	cl2 = time.clock()
-	print(type(cl2), cl2)
+	print("cl2:", type(cl2), cl2)
 	time.sleep(0.8)
 
 	cl3 = time.clock()
-	print(type(cl3), cl3)
+	print("cl3:", type(cl3), cl3)
 
 	diff = cl2-cl1
 	print("cl2-cl1:", type(diff), diff)
 
 def perf_counter_diff():
+	print("\n----perf_counter_diff------")
 	cl1 = time.perf_counter()
-	print(type(cl1), cl1)
+	print("cl1:", type(cl1), cl1)
 	time.sleep(1.3)
 
 	cl2 = time.perf_counter()
-	print(type(cl2), cl2)
+	print("cl2:", type(cl2), cl2)
 	time.sleep(0.8)
 
 	cl3 = time.perf_counter()
-	print(type(cl3), cl3)
+	print("cl3:", type(cl3), cl3)
 
 	diff = cl2-cl1
 	print("cl2-cl1:", type(diff), diff)
 
+
 def test():
+	test_datetime()
+	test_timestamp()
+	test_strtime()
+
 	strtime = "2017-02-16 15:43:42"
-	tm = str2timestamp(strtime)
 	time_diff_now(strtime)
 
 	time_clock_diff()
-	# perf_counter_diff()
+	perf_counter_diff()
 
 
 if __name__=='__main__':
