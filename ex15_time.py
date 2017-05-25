@@ -55,6 +55,7 @@ def test_timestamp():
 	tm = str2timestamp(strnow)
 	print(type(tm), tm)
 
+
 #3、时间字符串格式变换
 def test_strtime():
 	print("\ntest_strtime:")
