@@ -21,7 +21,7 @@ import sys
 # os.path.basename(path):返回文件名
 # os.path.dirname(path):返回文件路径 
 
-def test_path_funcs():
+def test_path_funcs(path):
     print("os.getcwd:", os.getcwd())
 
     print("\n--- path functions:")
@@ -35,9 +35,7 @@ def test_path_funcs():
     print(os.path.basename(name))
     print(name)
 
-    # path = "C:\data\今日网校"
-    path = "D:\\data\\books\\编程\\语言"
-    print("\n--- os.listdir:")
+    print("\n--- os.listdir:%s" % path)
     print(os.listdir(path))
 
     print("\n--- os.walk:")
@@ -55,6 +53,7 @@ def list_path(dir):
             print(filepath)  
 
 def list_path1(dir):
+    print("\n----list_path1-----\n") 
     yid = os.walk(dir)
     for rootDir, pathList, fileList in yid:
         print("\nrootDir:", rootDir)
@@ -62,6 +61,7 @@ def list_path1(dir):
         print("fileList:", fileList)
  
 def list_path2(dir):  
+    print("\n----list_path2-----\n") 
     yid = os.walk(dir)  
     for rootDir, pathList, fileList in yid:  
         for file in fileList:  
@@ -69,23 +69,29 @@ def list_path2(dir):
         for path in pathList:  
             print('path ' + os.path.join(rootDir, path))
 
-
-if __name__ == '__main__':
-    test_path_funcs()
-
-    path = "D:/data/books/编程/语言"  
-    # path = "C:/data/今日网校"
-    
+def test_list_path(path):
     print("\n----list_path-----\n") 
     list_path(path)
-
-    print("\n----list_path1-----\n") 
     list_path1(path)
-
-    print("\n----list_path2-----\n") 
     list_path2(path)
+
+
+if __name__ == '__main__':
+    # path = "D:/data/books/编程/语言"  
+    path = "C:/data/清一文档"
+
+    test_path_funcs(path)
+    test_list_path(path)
 
 # 获取脚本文件的当前路径
 print(sys.path)
 print(sys.path[0])
 print(os.getcwd())
+print(os.curdir)
+
+# 创建、删除目录(下面演示相对路径)
+spath = "./fun_test"
+os.mkdir(spath)
+print(os.path.isdir(spath))
+os.rmdir(spath)
+print(os.path.isdir(spath))
