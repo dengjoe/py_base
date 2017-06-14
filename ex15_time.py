@@ -122,6 +122,23 @@ def perf_counter_diff():
 	print("cl2-cl1:", type(diff), diff)
 
 
+# 用装饰器来增加时间统计功能
+from functools import wraps
+
+def timethis(func):
+	''' Decorator that reports the execution time.
+	'''
+	@wraps(func)
+	def wrapper(*args, **kwargs):
+		start = time.time()
+		result = func(*args, **kwargs)
+		end = time.time()
+		print(func.__name__, end-start)
+		return result
+	return wrapper	
+
+
+@timethis
 def test():
 	test_datetime()
 	test_timestamp()
