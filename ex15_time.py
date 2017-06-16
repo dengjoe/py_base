@@ -153,3 +153,7 @@ def test():
 
 if __name__=='__main__':
 	test()
+
+	# 去掉wrapper装饰器来运行
+	func = test.__wrapped__
+	func()
