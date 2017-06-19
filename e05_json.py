@@ -16,7 +16,7 @@ di2 = json.loads(strdi)
 print(di2, type(di2))
 
 # load from file
-with open(".\e05_test.json") as pf:
+with open(".\e05_json.json") as pf:
 	confs = json.load(pf)
 	print(confs, type(confs))
 

@@ -83,6 +83,29 @@ def test_type_class():
 	h = Hello()
 	h.hello()
 
+# 演示单体模式
+class Singleton(type):
+	def __init__(self, *args, **kwargs):
+		self.__instance = None
+		super().__init__(*args, **kwargs)
+
+	def __call__(self, *args, **kwargs):
+		if self.__instance is None:
+			self.__instance = super().__call__(*args, **kwargs)
+			return self.__instance
+		else:
+			return self.__instance
+
+# Example
+def test_singleton():
+	class Spam(metaclass=Singleton):
+		def __init__(self):
+			print('Creating Spam')
+
+	a = Spam()
+	b = Spam()
+	print(a==b)
+
 
 if __name__ == "__main__":
 	test_mycle()
@@ -90,3 +113,4 @@ if __name__ == "__main__":
 	print(ne3)
 
 	test_type_class()
+	test_singleton()
