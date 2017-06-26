@@ -91,10 +91,21 @@ print("max:", max(m2))
 print("sum:", sum(m2))
 
 print("m2[0:3]:", m2[0:3])
-print("m2[2:]:", m2[2:])
-print("m2[:2]:", m2[:2])
 print("m2[-3:]:", m2[-3:])
 
+print("m2[:2]:", m2[:2])
+print("m2[2:]:", m2[2:])
+
+# 切片的增量
+print("m2[::2]:", m2[::2])
+print("m2[::3]:", m2[::3])
+print("m2[::-1]:", m2[::-1])
+
+# 对切片赋值
+m2[2:4] = [20,30,40]
+print("m2:%r" % m2)
+del m2[2:4]
+print("m2:%r" % m2)
 
 # copy list。切片为新队列
 print("\ncopy:")
@@ -114,20 +125,7 @@ m5 = ["ball","circle","rectangle","ball"]
 print("\n",m5)
 print(set(m5))
 
-### tuple
-print("\ntuple:")
-t1 = ("a","c","f","d")
-print("t1:", t1)
-print("t1[1]:", t1[1])
 
-for a in t1[:3]:
-	print(a)
-
-t1 = ("g","o","o","d", m3)
-print("t1:", t1)
-m3.reverse()
-print("t1:", t1)
-print("\nedit list:")
 
 ### function
 print("")
@@ -144,25 +142,3 @@ m1 = []
 show_content(m1)
 show_content(m3)
 
-
-# generator
-print("\ngenerator")
-ll = [x*x for x in range(10)]
-print(type(ll), ll)
-print("Iterator:", isinstance(ll, collections.Iterator))
-
-lli = iter(ll)
-print(type(lli), lli)
-print("Iterator:", isinstance(lli, collections.Iterator))
-
-
-gl = (x*x for x in range(10))
-print(type(gl), gl)
-print("Iterator:", isinstance(gl, collections.Iterator))
-print("next", next(gl))
-for val in gl:
-	print(val)
-
-
-print(dir(ll))
-# print(dir(gl))
