@@ -70,6 +70,11 @@ print(vechiles)
 print("\nsoretd: ", sorted(vechiles))
 print(vechiles)
 
+# sorted函数，对不同类型元素的排序时，使用key
+l0 = [28, 14, '28', 5, '9', '1', 0, 6, '23', 19]
+print(sorted(l0, key=int))
+print(sorted(l0, key=str))
+
 # len
 print("\nlist len:", len(vechiles))
 
@@ -90,6 +95,8 @@ print("min:", min(m2))
 print("max:", max(m2))
 print("sum:", sum(m2))
 
+
+# 切片：切片可以用于list，tuple，str
 print("m2[0:3]:", m2[0:3])
 print("m2[-3:]:", m2[-3:])
 
@@ -120,11 +127,23 @@ m4.append("good")
 print("m3:", m3)
 print("m4:", m4)
 
+
+# list的+，*运算
+ll1 = list(range(3))
+print(ll1)
+ll2 = ll1+[2]
+print(ll2)
+ll3 = ll1*2
+print(ll3)
+
+weird_board = [['_'] * 3] * 3
+print(weird_board)
+
+
 # list to set(集合)
 m5 = ["ball","circle","rectangle","ball"]
 print("\n",m5)
 print(set(m5))
-
 
 
 ### function

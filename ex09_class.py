@@ -83,6 +83,7 @@ def test_type_class():
 	h = Hello()
 	h.hello()
 
+
 # 演示单体模式
 class Singleton(type):
 	def __init__(self, *args, **kwargs):
@@ -96,7 +97,6 @@ class Singleton(type):
 		else:
 			return self.__instance
 
-# Example
 def test_singleton():
 	class Spam(metaclass=Singleton):
 		def __init__(self):
@@ -107,6 +107,70 @@ def test_singleton():
 	print(a==b)
 
 
+# 可调用类
+class Averager():
+	"""可调用类，计算移动平均值"""
+	def __init__(self):
+		self.series = []
+
+	def __call__(self, new_value):
+		self.series.append(new_value)
+		total = sum(self.series)
+		return total/len(self.series)
+
+def test_averager():
+	print("")
+	avg = Averager()
+	print(avg.__class__.__name__)
+	print(avg(10))
+	print(avg(11))
+	print(avg(12))
+
+
+# 闭包:闭包是一种函数，它会保留定义函数时存在的自由变量的绑定，这样调用函数时，虽然定义作用域不可用了，但是仍能使用那些绑定。
+def make_averager():
+	"""计算移动平均值的高阶函数"""
+	series = [] #series 是自由变量（free variable）。指未在本地作用域中绑定的变量
+
+	def averager(new_value):
+		series.append(new_value)
+		total = sum(series)
+		return total/len(series)
+
+	return averager
+
+def test_make_averager():
+	avg = make_averager()
+	print(avg.__code__.co_varnames, avg.__code__.co_freevars)
+	print(avg(10))
+	print(avg(11))
+	print(avg(12))
+	print(avg.__closure__[0].cell_contents)
+	print("%r\n" % avg.__closure__)
+
+#闭包的nolocal版
+def make_averager2():
+	count = 0
+	total = 0
+
+	def averager(new_value):
+		nonlocal count, total #必须声明nolocal，否则会因为赋值而被认为是局部变量
+		count += 1
+		total += new_value
+		return total / count
+
+	return averager
+
+def test_make_averager2():
+	avg = make_averager2()
+	print(avg.__code__.co_varnames, avg.__code__.co_freevars)
+	print(avg(10))
+	print(avg(11))
+	print(avg(12))
+	print(avg.__closure__[0].cell_contents, avg.__closure__[1].cell_contents)
+	print("")
+
+
 if __name__ == "__main__":
 	test_mycle()
 	ne3 = Mycle("hello3", 567)
@@ -114,3 +178,7 @@ if __name__ == "__main__":
 
 	test_type_class()
 	test_singleton()
+
+	test_averager()
+	test_make_averager()
+	test_make_averager2()
