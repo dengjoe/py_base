@@ -8,10 +8,10 @@ from functools import reduce
 #1. lamda 匿名函数
 mul = lambda x:x*x
 add = lambda x:x+x
-iterable =  [1,2,3,4,5,6,7,8,9]
 
 
 #2. map:接收一个函数和一个序列，返回一个Iterator,惰性序列
+iterable =  [1,2,3,4,5,6,7,8,9]
 m0 = map(add, iterable)
 print(type(m0), m0)
 print("Iterable:", isinstance(m0, collections.Iterable))
@@ -83,6 +83,26 @@ now()
 print(now_time())
 
 
+# test decorator way.
+def log1(func):
+	def inner():
+		print("%s() in" %func.__name__)
+		ret = func()
+		print("%s() out" %func.__name__)
+		return ret
+	return inner
+
+# 装饰器实质是用log1替代了foofunc1，而在log1中再调用了该函数
+@log1
+def foofunc1():
+	print("hello test1")
+	return "hello 1"
+
+print("")
+ret = foofunc1()
+print(ret)
+
+
 # test other way.
 def log2(func):
 	print("%s() in" %func.__name__)
@@ -90,9 +110,10 @@ def log2(func):
 	print("%s() out" %func.__name__)
 	return ret
 
-def foofunc():
-	print("hello test")
-	return "hello"
+def foofunc2():
+	print("hello test2")
+	return "hello 2"
 
-ret = log2(foofunc)
+print("")
+ret = log2(foofunc2)
 print(ret)
