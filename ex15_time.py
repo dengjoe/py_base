@@ -63,6 +63,7 @@ def test_strtime():
 
 	#use time
 	time_array = time.strptime(strtime, "%Y-%m-%d %H:%M:%S")
+	print("time_array:", time_array)
 	str2 = time.strftime("%Y/%m/%d %H:%M:%S", time_array)
 	print(strtime, "->", str2)
 
@@ -75,6 +76,8 @@ def test_strtime():
 #计算时间差
 def time_diff_now(strtime):
 	print("\n----time_diff_now------")
+
+	# datetime
 	now = datetime.datetime.now()
 	print("now:", type(now), now)
 
@@ -86,6 +89,12 @@ def time_diff_now(strtime):
 	print("seconds:", diff.seconds)
 	print("microseconds:", diff.microseconds)
 	print("days:", diff.days)
+
+	# time
+	time_now = time.time()
+	time_next = time_now + 20
+	print("now: %s" % timestamp2str(time_now))
+	print("next: %s" % timestamp2str(time_next))
 
 
 # 计时函数。windows下正常，linux下不对
