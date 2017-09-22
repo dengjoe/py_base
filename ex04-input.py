@@ -31,5 +31,9 @@ def input2dict():
 		dic[name] = password
 	return dic
 
+
+ls = input2list()
+print(ls)
+
 nps = input2dict()
 print(nps)
