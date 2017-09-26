@@ -21,6 +21,7 @@ with open(".\e05_json.json") as pf:
 	confs = json.load(pf)
 	print(confs, type(confs))
 
+
 # 对象序列化为json
 class MsgItem(object):
 	def __init__(self, dic):
