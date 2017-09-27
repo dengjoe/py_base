@@ -161,3 +161,6 @@ m1 = []
 show_content(m1)
 show_content(m3)
 
+# 构建
+urls = ['http://www.baidu.com/s?wd={}'.format(i) for i in range(10)]
+print(urls)

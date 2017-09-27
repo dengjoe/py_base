@@ -18,28 +18,34 @@ def iter01(name):
 
 
 def test_yield():
-    print("\n------test generator a------------")
+    print("\n------test generator a:")
     a = iter01("a")
     print(type(iter01))
     print(a)
 
-    for i in a:
+    for i in a: # 用for...in方式遍历，比while循环简洁，不用管StopIteration
     	print(i)
 
     print("------test generator b:")
     b = iter01("b")
-    print(b.__next__())  # next()在python3中会错误
-    print(b.__next__())
-    print(b.__next__())
-    #b.__next__() #StopIteration here
+    while True:
+        try:
+            print(next(b))  
+        except StopIteration:
+            print("StopIteration in b")
+            break
+
 
     print("------test generator c:")
-    c = iter01("c")
-    print(c.send(None))  # can't send non-None value to a just-started generator
-    print(c.send(8))     # 执行send方法会首先把上一次挂起的yield语句的返回值通过参数设定，从而实现与生成器方法的交互。
-    print(c.__next__())
-    # print(c.send(9))
-    #c.send(10) #StopIteration here
+    try:
+        c = iter01("c")
+        print(c.send(None))  # can't send non-None value to a just-started generator
+        print(c.send(8))     # 执行send方法会首先把上一次挂起的yield语句的返回值通过参数设定，从而实现与生成器方法的交互。
+        print(c.__next__())  # 没有c.next()，而next()调用此__next__()
+        print(c.send(9))     # StopIteration here
+        c.send(10)
+    except StopIteration:
+        print("StopIteration in c")
 
 
 

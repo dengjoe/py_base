@@ -7,6 +7,9 @@ import threading
 # 把@asyncio.coroutine替换为async；
 # 把yield from替换为await
 
+# 如果一个生成器内部需要遍历另一个生成器，并将数据返回给调用者，你需要遍历它并处理所遇到的异常；
+# 而用了 yield from 后，则可以一行代码解决这些问题。
+
 @asyncio.coroutine
 def hello():
     print("Hello world!")
