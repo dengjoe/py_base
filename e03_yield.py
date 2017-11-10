@@ -2,6 +2,18 @@
 # -*- coding: utf-8 -*-
 ## 
 
+"""
+Python中 yield 是一个关键词，它可以用来创建协程。
+1.当调用 yield value 的时候，这个 value 就被返回出去了，CPU控制权就交给了协程的调用方。
+  调用 yield 之后，如果想要重新返回协程，需要调用Python中内置的 next 方法。
+2.当调用 y = yield x 的时候，x被返回给调用方。要继续返回协程上下文，调用方需要再执行协程的 send 方法。
+  这时，给send方法的参数会被传入协程作为这个表达式的值(本例中，这个值会被y接收到)。
+
+这意味着我们可以用协程来写异步代码，当程序等待异步操作的时候，只需要使用yield把控制权交出去就行了，
+当异步操作完成了再进入协程继续执行。
+"""
+
+
 # 有yield的函数就是生成器，return a generator。生成器被调用时不会立即执行。
 def iter01(name):
 	i = 0                    # 第1次运行进入
@@ -99,8 +111,40 @@ def test_nread_file(fpath):
     	print(n)
 
 
+# test socket yield
+import select
+import socket
+ 
+def coroutine_socket():
+    sock = socket.socket()
+    sock.setblocking(0)
+    address = yield sock
+
+    try:
+        sock.connect(address)
+    except BlockingIOError:
+        pass
+    
+    data = yield
+    size = yield sock.send(data)
+    yield sock.recv(size)
+ 
+ 
+def test_socket():
+    coro = coroutine_socket()
+    sock = coro.send(None)
+    wait_list = (sock.fileno(),)
+    coro.send(('www.baidu.com', 80))
+    select.select((), wait_list, ())
+    coro.send(b'GET / HTTP/1.1\r\nHost: www.baidu.com\r\nConnection: Close\r\n\r\n')
+    select.select(wait_list, (), ())
+    print(coro.send(1024))
+
+
 if __name__ == '__main__':
     test_yield()
     test_produce_consumer()
 
     test_nread_file("C:\\Users\\kevin\\Desktop\\nicknames.txt")
+
+    test_socket()
