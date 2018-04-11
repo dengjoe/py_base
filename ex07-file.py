@@ -6,6 +6,7 @@
 __author__ = 'kevin deng'
 
 import os
+import csv
 
 def write_file(fname):
 	try:
@@ -28,15 +29,26 @@ def read_file(fname):
 		if f:
 			f.close()
 
+# 不需try，也无需close的
+def read_file2(fname):
+	with open(fname, 'r') as f:
+		for line in f.readlines():
+			print(line.strip()) # 把末尾的'\n'删掉	
+
+# 读取csv文件
+def read_csv(fname):
+	data = []
+	with open(fname, "r", encoding='UTF-8') as csvfile:
+		reader = csv.reader(csvfile) # 读取csv文件，返回的是迭代类型
+		for item in reader:
+			data.append(item)
+	print(data)
 
 
-                        # 
 if __name__ == '__main__':
 	fname = "./test.txt"
 	write_file(fname)
 	read_file(fname)
+	read_file2(fname)
 
-	# 不需try，也无需close的
-	with open(fname, 'r') as f:
-		for line in f.readlines():
-			print(line.strip()) # 把末尾的'\n'删掉
+	read_csv("./stocks.csv")
