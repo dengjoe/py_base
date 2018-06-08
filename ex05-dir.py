@@ -93,5 +93,6 @@ print(os.curdir)
 spath = "./fun_test"
 os.mkdir(spath)
 print(os.path.isdir(spath))
+print(os.path.isfile(spath))
 os.rmdir(spath)
 print(os.path.isdir(spath))
