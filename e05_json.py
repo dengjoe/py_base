@@ -7,12 +7,12 @@ __author__ = 'kevin deng'
 
 import json
 
-# json.dumps: dict -> string
+# json.dumps: dict -> json string
 di = dict(name="joe", age=21, score=88)
 strdi = json.dumps(di, indent=4)
 print(strdi, type(strdi))
 
-# json.loads: string -> dict
+# json.loads: json string -> dict
 di2 = json.loads(strdi)
 print(di2, type(di2))
 
