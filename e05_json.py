@@ -16,10 +16,13 @@ print(strdi, type(strdi))
 di2 = json.loads(strdi)
 print(di2, type(di2))
 
+
 # json.load: file -> dict
-with open(".\e05_json.json") as pf:
-	confs = json.load(pf)
-	print(confs, type(confs))
+def print_json_file(fname):
+	print("\n=== file: %s" % fname)
+	with open(fname, 'r', encoding='utf8') as pf:
+		confs = json.load(pf)
+		print(confs, type(confs))
 
 
 # 对象序列化为json
@@ -80,3 +83,5 @@ def test_json_msg():
 
 if __name__ == '__main__':
 	test_json_msg()
+	print_json_file("./e05_01.json")	
+	print_json_file("./e05_02.json")
