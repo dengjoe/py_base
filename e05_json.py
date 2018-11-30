@@ -23,6 +23,7 @@ def print_json_file(fname):
 	with open(fname, 'r', encoding='utf8') as pf:
 		confs = json.load(pf)
 		print(confs, type(confs))
+		return confs
 
 
 # 对象序列化为json
@@ -84,4 +85,7 @@ def test_json_msg():
 if __name__ == '__main__':
 	test_json_msg()
 	print_json_file("./e05_01.json")	
-	print_json_file("./e05_02.json")
+	confs = print_json_file("./e05_02.json")
+	for dic in confs:
+		# print(dic.items())
+		print("nick:%s \tcard:%s" % (dic["nick"], dic["card"]))
